@@ -5,7 +5,7 @@ const sequelize = require('./database.js')
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({ db: sequelize })
-const port = 80
+const port = 8000
 
 const Books = require('./models/books.js')
 
