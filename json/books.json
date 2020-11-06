@@ -1,0 +1,136 @@
+﻿{
+  "products" : [ {
+    "author" : "Дэн Браун",
+    "id" : 0,
+    "image" : "https://cv9.litres.ru/pub/c/elektronnaya-kniga/cover_415/27624091-den-braun-proishozhdenie-27624091.jpg",
+    "price" : 710,
+    "rating" : 3,
+    "title" : "Происхождение"
+  }, {
+    "author" : "Джордж Оруэлл",
+    "id" : 1,
+    "image" : "https://cv0.litres.ru/sbc/09233908_cover_185-elektronnaya-kniga--.jpg",
+    "price" : 415,
+    "rating" : 5,
+    "title" : "1984"
+  }, {
+    "author" : "Донато Карризи",
+    "id" : 2,
+    "image" : "https://cv2.litres.ru/sbc/31635724_cover_185-elektronnaya-kniga-donato-karrizi-devushka-v-tumane.jpg",
+    "price" : 464,
+    "rating" : 4,
+    "title" : "Девушка в тумане"
+  }, {
+    "author" : "Михаил Зыгарь",
+    "id" : 3,
+    "image" : "https://cv0.litres.ru/sbc/30804904_cover_185-elektronnaya-kniga-mihail-zygar-imperiya-dolzhna-umeret.jpg",
+    "price" : 741,
+    "rating" : 3,
+    "title" : "Империя должна умереть"
+  }, {
+    "author" : "Татьяна Устинова",
+    "id" : 4,
+    "image" : "https://cv9.litres.ru/sbc/30087292_cover_185-elektronnaya-kniga-tatyana-ustinova-zemnoe-prityazhenie.jpg",
+    "price" : 317,
+    "rating" : 1,
+    "title" : "Земное притяжение"
+  }, {
+    "author" : "Гузель Яхина",
+    "id" : 5,
+    "image" : "https://cv5.litres.ru/sbc/17411250_cover_185-elektronnaya-kniga-guzel-yahina-zuleyha-otkryvaet-glaza-2.jpg",
+    "price" : 254,
+    "rating" : 0,
+    "title" : "Зулейха открывает глаза"
+  }, {
+    "author" : "Джулия Эндерс",
+    "id" : 6,
+    "image" : "https://cv7.litres.ru/pub/c/elektronnaya-kniga/cover_120/12178377-dzhuliya-enders-ocharovatelnyy-kishechnik-kak-samyy-moguschestvennyy-organ-upravlyaet-nami-12178377.jpg",
+    "price" : 573,
+    "rating" : 4,
+    "title" : "Очаровательный кишечник. Как самый могущественный орган управляет нами"
+  }, {
+    "author" : "Виктор Пелевин",
+    "id" : 7,
+    "image" : "https://cv7.litres.ru/sbc/31221870_cover_185-elektronnaya-kniga-viktor-pelevin-iphuck-10-25564903.jpg",
+    "price" : 246,
+    "rating" : 0,
+    "title" : "iPhuck 10"
+  }, {
+    "author" : "Стивен Кови",
+    "id" : 8,
+    "image" : "https://cv8.litres.ru/pub/c/elektronnaya-kniga/cover_415/4239285--.jpg",
+    "price" : 347,
+    "rating" : 5,
+    "title" : "7 навыков высокоэффективных людей: Мощные..."
+  }, {
+    "author" : "Роберт Брындза",
+    "id" : 9,
+    "image" : "https://cv3.litres.ru/pub/c/elektronnaya-kniga/cover_415/27351732-robert-bryndza-12646976-devushka-vo-ldu.jpg",
+    "price" : 882,
+    "rating" : 2,
+    "title" : "Девушка во льду"
+  }, {
+    "author" : "Хэл Элрод",
+    "id" : 10,
+    "image" : "https://cv1.litres.ru/pub/c/elektronnaya-kniga/cover_415/19063017-hel-elrod-magiya-utra.jpg",
+    "price" : 829,
+    "rating" : 1,
+    "title" : "Магия утра. Как первый час дня определяет ваш успех"
+  }, {
+    "author" : "Борис Акунин",
+    "id" : 11,
+    "image" : "https://cv3.litres.ru/sbc/31629439_cover_185-elektronnaya-kniga-boris-akunin-aziatskaya-evropeizaciya-istoriya-rossiyskogo-gosudarstva-car-petr-alekseevich.jpg",
+    "price" : 389,
+    "rating" : 2,
+    "title" : "Азиатская европеизация. История Российского государства. Царь Петр..."
+  }, {
+    "author" : "Анджей Сапковский",
+    "id" : 12,
+    "image" : "https://cv6.litres.ru/pub/c/elektronnaya-kniga/cover_415/6375365-andzhey-sapkovskiy-vedmak.jpg",
+    "price" : 424,
+    "rating" : 3,
+    "title" : "Ведьмак (сборник)"
+  }, {
+    "author" : "Айн Рэнд",
+    "id" : 13,
+    "image" : "https://cv7.litres.ru/pub/c/elektronnaya-kniga/cover_415/4236675-ayn-rend-atlant-raspravil-plechi.jpg",
+    "price" : 157,
+    "rating" : 2,
+    "title" : "Атлант расправил плечи"
+  }, {
+    "author" : "Александра Маринина",
+    "id" : 14,
+    "image" : "https://cv6.litres.ru/sbc/33285466_cover_185-elektronnaya-kniga-aleksandra-marinina-cena-voprosa-tom-1-22638660.jpg",
+    "price" : 664,
+    "rating" : 0,
+    "title" : "Цена вопроса. Том 1"
+  }, {
+    "author" : "Гиллиан Флинн",
+    "id" : 15,
+    "image" : "https://cv2.litres.ru/sbc/11029722_cover_185-elektronnaya-kniga-gillian-flinn-ischeznuvshaya.jpg",
+    "price" : 476,
+    "rating" : 4,
+    "title" : "Исчезнувшая"
+  }, {
+    "author" : "Дмитрий Глуховский",
+    "id" : 17,
+    "image" : "https://cv9.litres.ru/sbc/13698392_cover_185-elektronnaya-kniga-dmitriy-gluhovskiy-metro-2035.jpg",
+    "price" : 837,
+    "rating" : 4,
+    "title" : "Метро 2035"
+  }, {
+    "author" : "Ю Несбё",
+    "id" : 18,
+    "image" : "https://cv6.litres.ru/pub/c/elektronnaya-kniga/cover_415/4578362-u-nesbe-snegovik-4578362.jpg",
+    "price" : 796,
+    "rating" : 5,
+    "title" : "Снеговик"
+  }, {
+    "author" : "Джонатан Хэнкок",
+    "id" : 19,
+    "image" : "https://cv1.litres.ru/sbc/14195715_cover_185-elektronnaya-kniga-dzhonatan-henkok-kak-trenirovat-pamyat-ne-dumayte-o-pamyati-luchshe-ispolzuyte-ee-na-vse-sto.jpg",
+    "price" : 399,
+    "rating" : 5,
+    "title" : "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!"
+  } ]
+}

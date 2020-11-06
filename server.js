@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const fs = require('fs')
 const server = express()
 const sequelize = require('./database.js')
 const session = require('express-session')
@@ -8,6 +9,7 @@ const sessionStore = new SequelizeStore({ db: sequelize })
 const port = 8000
 
 const Books = require('./models/books.js')
+const { response } = require('express')
 
 sessionStore.sync()
 
@@ -30,6 +32,12 @@ server.use(session({
 
 server.get('/test', (req, res) => {
   res.json({ title: 'API для книг', uid: req.sessionID })
+})
+
+server.get('/api/books', (req, res) => {
+  fs.readFile(__dirname+'/json/books.json', (err, data) => {
+    res.header('Content-Type','application/json').end(data)
+  })
 })
 
 
