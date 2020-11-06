@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const fs = require('fs')
 const server = express()
+const bodyParser = require('body-parser')
 const sequelize = require('./database.js')
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
@@ -9,13 +10,13 @@ const sessionStore = new SequelizeStore({ db: sequelize })
 const port = 8000
 
 const Books = require('./models/books.js')
-const { response } = require('express')
 
 sessionStore.sync()
 
 Books.sync({ alter: true })
 
 server.use(cors())
+server.use(bodyParser.json())
 
 server.use(session({
   secret: 'oijgyuytguhi',
@@ -35,9 +36,53 @@ server.get('/test', (req, res) => {
 })
 
 server.get('/api/books', (req, res) => {
-  fs.readFile(__dirname+'/json/books.json', (err, data) => {
-    res.header('Content-Type','application/json').end(data)
+  Books.findAndCountAll()
+    .then(result => {
+      const books = result.rows.map(book => book.dataValues)
+      res.json({
+        status: true,
+        data: {
+          count: result.count,
+          books
+        }
+      })
+    })
+})
+
+// server.delete('/api/books', (res, res) => {
+
+// })
+
+server.post('/api/books', (req, res) => {
+  const { title, picture, author, price } = req.body
+  if (!title || !picture || !author || !price) {
+    res.json({
+      status: false,
+      message: 'Заполните все поля'
+    })
+    return
+  }
+  Books.create({
+    title,
+    picture,
+    author,
+    price
   })
+    .then(() => {
+      res.json({
+        status: true,
+        message: 'Книга добавлена'
+      })
+    })
+    .catch(err => {
+      res.json({
+        status: false,
+        error: {
+          name: err.name,
+          message: err.parent.sqlMessage
+        }
+      })
+    })
 })
 
 
