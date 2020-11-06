@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const server = express()
 const sequelize = require('./database.js')
 const session = require('express-session')
@@ -11,6 +12,8 @@ const Books = require('./models/books.js')
 sessionStore.sync()
 
 Books.sync({ alter: true })
+
+server.use(cors())
 
 server.use(session({
   secret: 'oijgyuytguhi',

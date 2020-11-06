@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "nodemon": "nodemon server.js",
+    "start": "node server.js",
+    "deploy": "cd dist && rsync --archive --compress --delete . root@risky-kalkwand:/var/www/nodejs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "connect-session-sequelize": "^7.0.4",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
