@@ -25,5 +25,5 @@ jobs:
       # - run: npm ci
       # - run: npm run build
       # Deploy
-      - run: ssh -p22 root@81.163.30.135 "cd /var/www/nodejs/ && npm i && npm update && npm run build"
-      # - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@risky-kalkwand:/var/www/nodejs/
+      # - run: ssh -p22 root@81.163.30.135 "cd /var/www/nodejs/ && npm i && npm update && npm run build"
+      - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@81.163.30.135:/var/www/nodejs/
