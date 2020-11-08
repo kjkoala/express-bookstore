@@ -266,6 +266,13 @@ server.delete('/api/cart', async (req, res) => {
 server.post('/api/auth/register', async (req, res) => {
   try {
     const { password, email, passwordConfirm } = req.body
+    if(!password || !email || !passwordConfirm) {
+      res.json({
+        status: false,
+        message: 'Необходимо заполнить все поля'
+      })
+      return
+    }
     if (password !== passwordConfirm) {
       res.json({
         status: false,
