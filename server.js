@@ -47,8 +47,8 @@ passport.use(new LocalStrategy({
     const valid = await user.isPasswordValid(password)
     if (!valid) {
       done('Email или пароль не совпадают', null)
+      return
     }
-    return
     done(null, user)
   }
 ))
@@ -81,23 +81,23 @@ server.use(session({
   passport.session()
 )
 
-
-server.get('/test', (req, res) => {
-  res.json({ title: 'API для книг', uid: req.sessionID })
-})
-
 server.get('/api/books', (req, res) => {
-  let { limit, offset } = req.query
+  let { limit, offset, filter, sort } = req.query
+  const finders = {}
   if (!limit) {
-    limit = 10
+    finders.limit = 10
+  } else {
+    finders.limit = parseInt(limit)
   }
   if (!offset) {
-    offset = 0
+    finders.offset = 0
+  } else {
+    finders.offset = parseInt(offset)
   }
-  Books.findAndCountAll({
-    limit: parseInt(limit),
-    offset: parseInt(offset)
-  })
+  if (filter && sort) {
+    finders.order = [[filter, sort]]
+  }
+  Books.findAndCountAll(finders)
     .then(result => {
       const books = result.rows.map(book => book.dataValues)
       res.json({
@@ -108,11 +108,34 @@ server.get('/api/books', (req, res) => {
         }
       })
     })
+    .catch(err => {
+      res.json({
+        status: false,
+        message: err
+      })
+    })
 })
 
-// server.delete('/api/books', (res, res) => {
-
-// })
+server.delete('/api/books/:id', (req, res) => {
+  const { id } = req.params
+  Books.destroy({
+    where: {
+      id
+    }
+  })
+    .then(result => {
+      res.json({
+        status: result ? true : false,
+        message: result ? 'Книга удалена' : 'Книга не найдена'
+      })
+    })
+    .catch(err => {
+      res.json({
+        status: false,
+        message: err
+      })
+    })
+})
 
 server.post('/api/books', (req, res) => {
   const { title, picture, author, price } = req.body
