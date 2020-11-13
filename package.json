@@ -7,7 +7,6 @@
     "dev": "nodemon server.js",
     "nodemon": "nodemon server.js",
     "start": "node server.js",
-    "deploy": "cd dist && rsync --archive --compress --delete . root@81.163.30.135:/var/www/nodejs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

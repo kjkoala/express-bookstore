@@ -87,7 +87,17 @@ server.get('/test', (req, res) => {
 })
 
 server.get('/api/books', (req, res) => {
-  Books.findAndCountAll()
+  let { limit, offset } = req.query
+  if (!limit) {
+    limit = 10
+  }
+  if (!offset) {
+    offset = 0
+  }
+  Books.findAndCountAll({
+    limit: parseInt(limit),
+    offset: parseInt(offset)
+  })
     .then(result => {
       const books = result.rows.map(book => book.dataValues)
       res.json({
@@ -266,7 +276,7 @@ server.delete('/api/cart', async (req, res) => {
 server.post('/api/auth/register', async (req, res) => {
   try {
     const { password, email, passwordConfirm } = req.body
-    if(!password || !email || !passwordConfirm) {
+    if (!password || !email || !passwordConfirm) {
       res.json({
         status: false,
         message: 'Необходимо заполнить все поля'
@@ -347,7 +357,7 @@ server.post('/api/auth/logout', (req, res) => {
 
   res.json({
     status: true,
-    message:'Вы вышли из профиля'
+    message: 'Вы вышли из профиля'
   })
 })
 
