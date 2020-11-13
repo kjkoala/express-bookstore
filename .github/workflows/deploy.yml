@@ -25,4 +25,4 @@ jobs:
       - run: npm ci
       # - run: npm run build
       # Deploy
-      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete -zvh /tst/ /var/www/ . root@81.163.30.135:/var/www/nodejs/
+      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete -zvh $HOME/tst/ /var/www/vue/ . root@81.163.30.135:/var/www/nodejs/
