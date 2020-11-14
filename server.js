@@ -276,7 +276,10 @@ server.put('/api/cart', async (req, res) => {
     }
     res.status(400).end()
   } catch (e) {
-    res.status(500).end()
+    res.status(500).json({
+      status: false,
+      message: e
+    })
   }
 })
 
