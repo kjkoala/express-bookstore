@@ -268,7 +268,7 @@ server.put('/api/cart', async (req, res) => {
         books
       }, {
         where: {
-          uid: userEmail
+          uid: userEmail || sessionID
         }
       })
       res.status(202).end()
