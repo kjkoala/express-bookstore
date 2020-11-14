@@ -293,7 +293,7 @@ server.delete('/api/cart', async (req, res) => {
         uid: userEmail || sessionID
       }
     })
-    const books = JSON.parse(cart.books)
+    const books = cart.books
     if (bookId in books) {
       books[bookId] -= count
       if (books[bookId] <= 0) {
