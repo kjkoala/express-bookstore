@@ -169,14 +169,46 @@ server.post('/api/books', (req, res) => {
     })
 })
 
+server.put('/api/books/:id', (req, res) => {
+  const { id } = req.params
+  const { title, picture, author, price } = req.body
+  if (!title || !picture || !author || !price) {
+    res.json({
+      status: false,
+      message: 'Заполните все поля'
+    })
+    return
+  }
+  Books.update({
+    title,
+    picture,
+    author,
+    price
+  }, {
+    where: {
+      id
+    }
+  })
+    .then(() => {
+      res.json({
+        status: true,
+        message: 'Книга обновлена'
+      })
+    })
+    .catch(e => {
+      res.json({
+        status: false,
+        message: e
+      })
+    })
+})
+
 server.get('/api/cart', (req, res) => {
   const { sessionID } = req
-  const userEmail = req.session.passport.user
+  const userEmail = req.session.passport && req.session.passport.user
   Cart.findAndCountAll({
     where: {
-      uid: {
-        [Op.or]: [userEmail, sessionID]
-      }
+      uid: userEmail || sessionID
     }
   })
     .then(reslut => {
@@ -199,13 +231,18 @@ server.get('/api/cart', (req, res) => {
 server.put('/api/cart', async (req, res) => {
   try {
     const { bookId, count } = req.body
+    if(!bookId || !count || typeof count === 'string') {
+      res.status(500).json({
+        status: false,
+        message: 'Ошибка при передаче запроса'
+      })
+      return
+    }
     const { sessionID } = req
-    const userEmail = req.session.passport.user
+    const userEmail = req.session.passport && req.session.passport.user
     const [cartUser, created] = await Cart.findOrCreate({
       where: {
-        uid: {
-          [Op.or]: [userEmail, sessionID]
-        }
+        uid: userEmail || sessionID
       },
       defaults: {
         uid: userEmail || sessionID,
@@ -231,7 +268,7 @@ server.put('/api/cart', async (req, res) => {
         books
       }, {
         where: {
-          uid: sessionID
+          uid: userEmail
         }
       })
       res.status(202).end()
@@ -247,12 +284,10 @@ server.delete('/api/cart', async (req, res) => {
   try {
     const { bookId, count } = req.body
     const { sessionID } = req
-    const userEmail = req.session.passport.user
+    const userEmail = req.session.passport && req.session.passport.user
     const cart = await Cart.findOne({
       where: {
-        uid: {
-          [Op.or]: [userEmail, sessionID]
-        }
+        uid: userEmail || sessionID
       }
     })
     const books = JSON.parse(cart.books)
@@ -266,7 +301,7 @@ server.delete('/api/cart', async (req, res) => {
           books
         }, {
           where: {
-            uid: sessionID
+            uid: userEmail || sessionID
           }
         })
 
@@ -278,7 +313,7 @@ server.delete('/api/cart', async (req, res) => {
       } else {
         await Cart.destroy({
           where: {
-            uid: sessionID
+            uid: userEmail || sessionID
           }
         })
 
@@ -313,30 +348,41 @@ server.post('/api/auth/register', async (req, res) => {
       })
       return
     }
-    const user = await User.create({ email, password })
-    req.login(user, (err) => {
-      if (err) {
-        res.status(500).json({
-          status: false,
-          message: 'Ошибка при авторизации'
+    const [user, created] = await User.findOrCreate({
+      where: {
+        email
+      },
+      defaults: {
+        email,
+        password
+      }
+    })
+    if (created) {
+      req.login(user, (err) => {
+        if (err) {
+          res.status(500).json({
+            status: false,
+            message: 'Ошибка при авторизации'
+          })
+          return
+        }
+        res.json({
+          status: true,
+          message: 'Вы авторизовались'
         })
         return
-      }
-      res.json({
-        status: true,
-        message: 'Вы авторизовались'
       })
-      return
-    })
+    } else {
+      res.json({
+        status: false,
+        message: 'Такой email уже существует'
+      })
+    }
 
   } catch (e) {
-    let message = 'Ошибка сервера'
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      message = 'Пользователь уже существует'
-    }
     res.status(500).json({
       status: false,
-      message
+      message: e
     })
   }
 })
@@ -370,7 +416,7 @@ server.post('/api/auth/login', (req, res) => {
         message: 'Вы авторизовались'
       })
     })
-  })(req, res, next)
+  })(req, res)
 })
 
 
