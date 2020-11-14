@@ -231,7 +231,7 @@ server.get('/api/cart', (req, res) => {
 server.put('/api/cart', async (req, res) => {
   try {
     const { bookId, count } = req.body
-    if(!bookId || !count || typeof count === 'string') {
+    if (!bookId || !count || typeof count === 'string') {
       res.status(500).json({
         status: false,
         message: 'Ошибка при передаче запроса'
@@ -326,8 +326,10 @@ server.delete('/api/cart', async (req, res) => {
     }
     res.status(400).end()
   } catch (e) {
-    console.log(e)
-    res.status(500).end()
+    res.status(500).json({
+      status: false,
+      message: e
+    })
   }
 })
 
