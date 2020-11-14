@@ -258,7 +258,7 @@ server.put('/api/cart', async (req, res) => {
     }
 
     if (cartUser) {
-      const books = JSON.parse(cartUser.dataValues.books)
+      const books = cartUser.dataValues.books
       if (bookId in books) {
         books[bookId] += count
       } else {
