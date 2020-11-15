@@ -217,13 +217,12 @@ server.get('/api/cart', (req, res) => {
       res.json({
         status: true,
         data: {
-          count: isExist ? Object.values(JSON.parse(cart.books)).length : 0,
+          count: isExist ? Object.values(cart.books).length : 0,
           books: isExist ? cart.books : {}
         }
       })
     })
     .catch(err => {
-      console.log(err)
       res.status(500).end()
     })
 })
